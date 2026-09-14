@@ -19,17 +19,29 @@
 
             const domNode = document.getElementById('app');
 
-            function Header() {
-                return <h1>Develop. Preview. Ship.</h1>;
+            function Header({ title }) {
+              return <h1>{title ? title : 'Default title'}</h1>;
             }
 
-            function HomePage() {
-                return (
-                    <div>
-                        <Header />
-                        </div>
-                );
-            }
+          function HomePage() {
+            const names = ['Ada Lovelace', 'Grace Hopper', 'Margaret Hamilton'];
+            const [likes, setlikes] = React.useState(0);
+             function handleClick() {
+               setlikes(likes + 1);
+  }
+           return (
+           <div>
+            <Header title="Develop. Preview. Ship." />
+            <ul>
+            {names.map((name) => (
+            <li key={name}>{name}</li>
+            ))}
+           </ul>
+           <button onClick={handleClick}>like({likes})</button>
+         </div>
+      );
+}
+
 
             const root = createRoot(domNode);
             root.render(<HomePage />);
